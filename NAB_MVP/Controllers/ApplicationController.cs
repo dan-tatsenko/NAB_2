@@ -8,17 +8,18 @@ using NAB_MVC.Models;
 
 namespace NAB_MVC.Controllers
 {
-    public class TransactionController
+    public class ApplicationController
     {
         IBankingFileView View;
         IBankingFile BankingFile;
         
 
-        public TransactionController(IBankingFileView view, IBankingFile file)
+        public ApplicationController(IBankingFileView view, IBankingFile file)
         {
             View = view;
             BankingFile = file;
-            View.SourceIdentifierChanged += View_SourceIdentifierChanged;
+            DownloadValues();
+            View.SourceIdentifierChanged += View_SourceIdentifierChanged;      
         }
 
         private void View_SourceIdentifierChanged(object sender, EventArgs e)

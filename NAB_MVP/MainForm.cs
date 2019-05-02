@@ -15,22 +15,17 @@ namespace NAB_MVC
 {
     public partial class frmMainForm : Form, IBankingFileView
     {
-        //private readonly NABFile NABfile;
-        private TransactionController Controller = null;
-
         public event EventHandler TransactionAdded;
         public event EventHandler TransactionDeleted;
         public event EventHandler TransactionChanged;
         public event EventHandler SourceIdentifierChanged;
 
-        public frmMainForm(NABFile file)
+        public frmMainForm()
         {
-            Controller = new TransactionController(this, file);
             InitializeComponent();
-            Controller.DownloadValues();
         }
     
-        public string TransactionLine { get => lblTransactionString.Text; set => lblTransactionString.Text=value; }
+        public string TransactionLine { get => lblTransactionString.Text; set => lblTransactionString.Text = value; }
         public string SourceIdetifierText { get => txtSourceIdentifier.Text; set => txtSourceIdentifier.Text = value; }
         public string AccountNumberText { get => txtAccountNumber.Text; set => txtAccountNumber.Text = value; }
         public string PaymentInstructionText { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
