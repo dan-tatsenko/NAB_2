@@ -19,12 +19,15 @@ namespace NAB_MVC.Controllers
             View = view;
             BankingFile = file;
             DownloadValues();
-            View.SourceIdentifierChanged += View_SourceIdentifierChanged;      
+            View.FileViewChanged += View_FileViewChanged;
         }
 
-        private void View_SourceIdentifierChanged(object sender, EventArgs e)
+        private void View_FileViewChanged(object sender, EventArgs e)
         {
-            throw new NotImplementedException();
+            Transaction t = new Transaction();
+            t.SourceIdentifier = View.SourceIdetifierText;
+
+            BankingFile.Add(t);
         }
 
         public void DownloadValues()

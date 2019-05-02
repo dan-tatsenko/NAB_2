@@ -15,10 +15,7 @@ namespace NAB_MVC
 {
     public partial class frmMainForm : Form, IBankingFileView
     {
-        public event EventHandler TransactionAdded;
-        public event EventHandler TransactionDeleted;
-        public event EventHandler TransactionChanged;
-        public event EventHandler SourceIdentifierChanged;
+        public event EventHandler FileViewChanged;
 
         public frmMainForm()
         {
@@ -43,23 +40,17 @@ namespace NAB_MVC
         public void FillTransactionChannels(List<string> list)
         {
             cbxPaymentChannel.Items.Clear();
-            foreach (var item in list)
-            {
-                cbxPaymentChannel.Items.Add(item);
-            }
+            cbxPaymentChannel.Items.AddRange(list.ToArray());
         }
         public void FillPaymentInstructions(List<string> list)
         {
             cbxPaymentInstruction.Items.Clear();
-            foreach (var item in list)
-            {
-                cbxPaymentInstruction.Items.Add(item);
-            }
+            cbxPaymentInstruction.Items.AddRange(list.ToArray());
         }
 
         private void txtSourceIdentifier_TextChanged(object sender, EventArgs e)
         {
-            SourceIdentifierChanged(this, new EventArgs());
+            FileViewChanged(this, new EventArgs());
         }
     }
 }

@@ -8,6 +8,20 @@ namespace NAB_MVC.Models
 {
     public class NABFile : IBankingFile
     {
+        private Dictionary<string, string> PaymentInstructions = new Dictionary<string, string>
+        {
+            ["05"] = "05 - Payment",
+            ["25"] = "25 - Refund",
+            ["35"] = "35 - Chargeback"
+        };
+        private Dictionary<string, string> PaymentChannels = new Dictionary<string, string>
+        {
+            ["PBW"] = "PBW - WEB Payments",
+            ["IVR"] = "IVR - Interactive Voice Response",
+            ["BPY"] = "BPY - Bank Payment",
+            ["DPP"] = "DPP - Direct Post Payment",
+        };
+
         private List<Transaction> TransactionList;
         private bool CurrentTransactionSaved;
         private int CurrentTransactionIndex;
@@ -25,14 +39,9 @@ namespace NAB_MVC.Models
             set => TransactionList[index] = value;
         }
 
-        public event EventHandler TransactionAdded;
-        public event EventHandler TransactionDeleted;
-        public event EventHandler TransactionChanged;
-
         public void Add(Transaction transaction)
         {
             TransactionList.Add(transaction);
-            TransactionAdded(this, new EventArgs());
             CurrentTransactionSaved = false;
         }
 
@@ -51,7 +60,7 @@ namespace NAB_MVC.Models
             if (index>=0 && index<Count)
             {
                 TransactionList.RemoveAt(index);
-                TransactionDeleted(this, new EventArgs());
+                CurrentTransactionIndex = Count - 1;
             }
         }
 
@@ -73,19 +82,20 @@ namespace NAB_MVC.Models
         public List<string> GetPaymentInstructionsList()
         {
             List<string> list = new List<string>();
-            list.Add("05 - Payment");
-            list.Add("25 - Refund");
-            list.Add("35 - Chargeback");
+            foreach (string code in PaymentInstructions.Keys)
+            {
+                list.Add(PaymentInstructions.[code]);
+            }
             return list;
         }
 
         public List<string> GetPaymentChannelsList()
         {
             List<string> list = new List<string>();
-            list.Add("PBW - WEB Payments");
-            list.Add("IVR - Interactive Voice Response");
-            list.Add("BPY - Bank Payment");
-            list.Add("DPP - Direct Post Payment");
+            foreach (string code in PaymentChannels.Keys)
+            {
+                list.Add(PaymentChannels.[code]);
+            }
             return list;
         }
     }

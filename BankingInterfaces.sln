@@ -3,8 +3,6 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.28010.2036
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NAB", "NAB\NAB.csproj", "{791F5A6E-5D8C-451D-AF4A-C7DCDF7A2159}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NAB_MVC", "NAB_MVP\NAB_MVC.csproj", "{7127C418-F7AE-4C69-ADAB-48076187AB84}"
 EndProject
 Global
@@ -13,10 +11,6 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{791F5A6E-5D8C-451D-AF4A-C7DCDF7A2159}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{791F5A6E-5D8C-451D-AF4A-C7DCDF7A2159}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{791F5A6E-5D8C-451D-AF4A-C7DCDF7A2159}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{791F5A6E-5D8C-451D-AF4A-C7DCDF7A2159}.Release|Any CPU.Build.0 = Release|Any CPU
 		{7127C418-F7AE-4C69-ADAB-48076187AB84}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{7127C418-F7AE-4C69-ADAB-48076187AB84}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7127C418-F7AE-4C69-ADAB-48076187AB84}.Release|Any CPU.ActiveCfg = Release|Any CPU

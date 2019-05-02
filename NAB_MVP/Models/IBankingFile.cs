@@ -19,9 +19,5 @@ namespace NAB_MVC.Models
         decimal TotalTransactionAmount();
         void SaveToFile(string path);
         List<string> ExportToList();
-
-        event EventHandler TransactionAdded;
-        event EventHandler TransactionDeleted;
-        event EventHandler TransactionChanged;
     }
 }

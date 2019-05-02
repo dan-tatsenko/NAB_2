@@ -6,6 +6,10 @@ using System.Threading.Tasks;
 
 namespace NAB_MVC.Views
 {
+    public class TransactionEventArgs : EventArgs
+    {
+
+    }
     public interface IBankingFileView
     {
         string SourceIdetifierText { get; set; }
@@ -27,6 +31,6 @@ namespace NAB_MVC.Views
         void FillPaymentInstructions(List<string> list);
         void FillTransactionChannels(List<string> list);
 
-        event EventHandler SourceIdentifierChanged;
+        event EventHandler FileViewChanged;
     }
 }

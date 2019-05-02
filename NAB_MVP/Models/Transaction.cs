@@ -7,22 +7,6 @@ using NAB_MVC.Views;
 
 namespace NAB_MVC.Models
 {
-    public enum PaymentInstructionType
-    {
-        Payment,            //05 - Payment
-        ErrorCorrection,    //25 - Refund
-        Reversal            //35 - Chargeback
-    }
-
-   public enum PaymentChannelType
-    {
-        WebPayment,                 //PBW - WEB Payments
-        InteractiveVoiceResponse,   //IVR - Interactive Voice Response
-        BankPayment,                //BPY - Bank Payment
-        DirectPostPayment,          //DPP - Direct Post Payment
-        PayInPerson                 //PiP - Payment in Person
-    }
-
     public class Transaction : ITransaction
     {
         public Transaction()
@@ -40,8 +24,8 @@ namespace NAB_MVC.Models
         public string SourceIdentifier { get => SourceIdentifier; set => value.Take(10); }
         public string AccountNumber { get; set; }
         
-        public PaymentInstructionType PaymentInstruction { get; set; }
-        public PaymentChannelType PaymentChannel { get; set; }
+        public string PaymentInstruction { get; set; }
+        public string PaymentChannel { get; set; }
         public string MaskedCreditCard { get; set; }
         public byte ErrorCorrectionReason { get; set; }
         public decimal Amount
@@ -62,8 +46,6 @@ namespace NAB_MVC.Models
         public string BankTransactionID { get; set; }
         public string AuthorisationCode { get; set; }
         public string OriginalReference { get; set; }
-
-        public string PaymentInstructionCode { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
 
         public override string ToString()
         {

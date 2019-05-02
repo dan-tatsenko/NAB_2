@@ -16,15 +16,15 @@ namespace NAB_MVC
         [STAThread]
         static void Main()
         {
-            NABFile file = new NABFile();
-            frmMainForm form;
-            ApplicationController controller;
+            NABFile File = new NABFile();
+            frmMainForm Form;
+            ApplicationController Controller;
 
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            form = new frmMainForm();
-            controller = new ApplicationController(form, file);
-            Application.Run(form);
+            Form = new frmMainForm();
+            Controller = new ApplicationController(Form, File);
+            Application.Run(Form);
         }
     }
 }

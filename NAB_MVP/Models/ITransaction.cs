@@ -9,6 +9,5 @@ namespace NAB_MVC.Models
     public interface ITransaction
     {
         decimal Amount { get; set; }
-        string PaymentInstructionCode { get; set; }
     }
 }
