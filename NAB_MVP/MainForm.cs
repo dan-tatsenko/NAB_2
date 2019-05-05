@@ -15,18 +15,41 @@ namespace NAB_MVC
 {
     public partial class frmMainForm : Form, IBankingFileView
     {
-        public event EventHandler FileViewChanged;
+
+        public event EventHandler AddTransactionRequested;
+        public event EventHandler ViewChanged;
+        public event EventHandler SaveTransacationRequested;
+        public event EventHandler<SavingFileEventArgs> SaveFileRequested;
 
         public frmMainForm()
         {
             InitializeComponent();
         }
-    
+
+
         public string TransactionLine { get => lblTransactionString.Text; set => lblTransactionString.Text = value; }
         public string SourceIdetifierText { get => txtSourceIdentifier.Text; set => txtSourceIdentifier.Text = value; }
         public string AccountNumberText { get => txtAccountNumber.Text; set => txtAccountNumber.Text = value; }
-        public string PaymentInstructionText { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-        public string PaymentChannelText { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+        public string PaymentInstructionText
+        {
+            get
+            {
+                int i = cbxPaymentInstruction.SelectedIndex;
+                return cbxPaymentInstruction.Items[i].ToString();
+            }
+            
+            set => cbxPaymentInstruction.SelectedIndex = cbxPaymentInstruction.Items.IndexOf(value);
+        }
+        public string PaymentChannelText
+        {
+            get
+            {
+                int i = cbxPaymentChannel.SelectedIndex;
+                return cbxPaymentChannel.Items[i].ToString();
+            }
+
+            set => cbxPaymentChannel.SelectedIndex = cbxPaymentChannel.Items.IndexOf(value);
+        }
         public string CreditCardText { get => txtCreditCard.Text; set => txtCreditCard.Text = value; }
         public string ErrorCorrectionReasonText { get => txtErrorCorrectionReason.Text; set => txtErrorCorrectionReason.Text = value; }
         public string AmountText { get => txtAmount.Text; set => txtAmount.Text = value; }
@@ -50,7 +73,105 @@ namespace NAB_MVC
 
         private void txtSourceIdentifier_TextChanged(object sender, EventArgs e)
         {
-            FileViewChanged(this, new EventArgs());
+            ViewChanged(this, new EventArgs());
         }
+
+        private void btnAddNewTransaction_Click(object sender, EventArgs e)
+        {
+            AddTransactionRequested(this, new EventArgs());
+        }
+
+        public void FillList(List<string> list, int selected)
+        {
+            lstFile.Items.Clear();
+            foreach (string line in list)
+            {
+                lstFile.Items.Add(line);
+            }
+            lstFile.SelectedIndex = selected;
+        }
+
+        private void txtAccountNumber_TextChanged(object sender, EventArgs e)
+        {
+            ViewChanged(this, new EventArgs());
+        }
+
+        private void cbxPaymentInstruction_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            ViewChanged(this, new EventArgs());
+        }
+
+        private void cbxPaymentChannel_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            ViewChanged(this, new EventArgs());
+        }
+
+        private void txtCreditCard_TextChanged(object sender, EventArgs e)
+        {
+            ViewChanged(this, new EventArgs());
+        }
+
+        private void txtErrorCorrectionReason_TextChanged(object sender, EventArgs e)
+        {
+            ViewChanged(this, new EventArgs());
+        }
+
+        private void txtAmount_TextChanged(object sender, EventArgs e)
+        {
+            ViewChanged(this, new EventArgs());
+        }
+
+        private void dtpPaymentDate_ValueChanged(object sender, EventArgs e)
+        {
+            ViewChanged(this, new EventArgs());
+        }
+
+        private void dtpPaymentTime_ValueChanged(object sender, EventArgs e)
+        {
+            ViewChanged(this, new EventArgs());
+        }
+
+        private void dtpSettlementDate_ValueChanged(object sender, EventArgs e)
+        {
+            ViewChanged(this, new EventArgs());
+        }
+
+        private void txtBankTransactionID_TextChanged(object sender, EventArgs e)
+        {
+            ViewChanged(this, new EventArgs());
+        }
+
+        private void txtAuthorisationCode_TextChanged(object sender, EventArgs e)
+        {
+            ViewChanged(this, new EventArgs());
+        }
+
+        private void txtOriginalReference_TextChanged(object sender, EventArgs e)
+        {
+            ViewChanged(this, new EventArgs());
+        }
+
+        private void btnSaveTransaction_Click(object sender, EventArgs e)
+        {
+            SaveTransacationRequested(this, new EventArgs());
+        }
+
+        private void btnDeleteTransaction_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnSaveToFile_Click(object sender, EventArgs e)
+        {
+            SaveFileDialog.ShowDialog();
+        }
+
+        private void SaveFileDialog_FileOk(object sender, CancelEventArgs e)
+        {
+            SavingFileEventArgs args = new SavingFileEventArgs(SaveFileDialog.FileName);
+            SaveFileRequested(this, args);
+        }
+
+
     }
 }

@@ -34,7 +34,7 @@
             this.cbxPaymentInstruction = new System.Windows.Forms.ComboBox();
             this.lblAmount = new System.Windows.Forms.Label();
             this.txtAmount = new System.Windows.Forms.TextBox();
-            this.btnAddTransaction = new System.Windows.Forms.Button();
+            this.btnSaveTransaction = new System.Windows.Forms.Button();
             this.lblTransactionString = new System.Windows.Forms.Label();
             this.lblSourceIdentifier = new System.Windows.Forms.Label();
             this.txtSourceIdentifier = new System.Windows.Forms.TextBox();
@@ -48,7 +48,7 @@
             this.dtpPaymentDate = new System.Windows.Forms.DateTimePicker();
             this.lblPaymentTime = new System.Windows.Forms.Label();
             this.dtpPaymentTime = new System.Windows.Forms.DateTimePicker();
-            this.label1 = new System.Windows.Forms.Label();
+            this.lblSettlementDate = new System.Windows.Forms.Label();
             this.dtpSettlementDate = new System.Windows.Forms.DateTimePicker();
             this.lblBankTransactionID = new System.Windows.Forms.Label();
             this.txtBankTransactionID = new System.Windows.Forms.TextBox();
@@ -56,8 +56,11 @@
             this.txtAuthorisationCode = new System.Windows.Forms.TextBox();
             this.lblOriginalReference = new System.Windows.Forms.Label();
             this.txtOriginalReference = new System.Windows.Forms.TextBox();
-            this.btnResetTransaction = new System.Windows.Forms.Button();
             this.lstFile = new System.Windows.Forms.ListBox();
+            this.btnAddNewTransaction = new System.Windows.Forms.Button();
+            this.btnDeleteTransaction = new System.Windows.Forms.Button();
+            this.btnSaveToFile = new System.Windows.Forms.Button();
+            this.SaveFileDialog = new System.Windows.Forms.SaveFileDialog();
             this.SuspendLayout();
             // 
             // lblAccountNumber
@@ -71,10 +74,12 @@
             // 
             // txtAccountNumber
             // 
+            this.txtAccountNumber.AllowDrop = true;
             this.txtAccountNumber.Location = new System.Drawing.Point(118, 33);
             this.txtAccountNumber.Name = "txtAccountNumber";
-            this.txtAccountNumber.Size = new System.Drawing.Size(100, 20);
+            this.txtAccountNumber.Size = new System.Drawing.Size(156, 20);
             this.txtAccountNumber.TabIndex = 1;
+            this.txtAccountNumber.TextChanged += new System.EventHandler(this.txtAccountNumber_TextChanged);
             // 
             // lblPaymentInstruction
             // 
@@ -91,13 +96,14 @@
             this.cbxPaymentInstruction.FormattingEnabled = true;
             this.cbxPaymentInstruction.Location = new System.Drawing.Point(118, 62);
             this.cbxPaymentInstruction.Name = "cbxPaymentInstruction";
-            this.cbxPaymentInstruction.Size = new System.Drawing.Size(100, 21);
+            this.cbxPaymentInstruction.Size = new System.Drawing.Size(156, 21);
             this.cbxPaymentInstruction.TabIndex = 3;
+            this.cbxPaymentInstruction.SelectedIndexChanged += new System.EventHandler(this.cbxPaymentInstruction_SelectedIndexChanged);
             // 
             // lblAmount
             // 
             this.lblAmount.AutoSize = true;
-            this.lblAmount.Location = new System.Drawing.Point(258, 36);
+            this.lblAmount.Location = new System.Drawing.Point(12, 183);
             this.lblAmount.Name = "lblAmount";
             this.lblAmount.Size = new System.Drawing.Size(43, 13);
             this.lblAmount.TabIndex = 4;
@@ -105,19 +111,21 @@
             // 
             // txtAmount
             // 
-            this.txtAmount.Location = new System.Drawing.Point(398, 33);
+            this.txtAmount.Location = new System.Drawing.Point(118, 180);
             this.txtAmount.Name = "txtAmount";
-            this.txtAmount.Size = new System.Drawing.Size(100, 20);
+            this.txtAmount.Size = new System.Drawing.Size(156, 20);
             this.txtAmount.TabIndex = 5;
+            this.txtAmount.TextChanged += new System.EventHandler(this.txtAmount_TextChanged);
             // 
-            // btnAddTransaction
+            // btnSaveTransaction
             // 
-            this.btnAddTransaction.Location = new System.Drawing.Point(538, 89);
-            this.btnAddTransaction.Name = "btnAddTransaction";
-            this.btnAddTransaction.Size = new System.Drawing.Size(219, 23);
-            this.btnAddTransaction.TabIndex = 6;
-            this.btnAddTransaction.Text = "Save Transaction";
-            this.btnAddTransaction.UseVisualStyleBackColor = true;
+            this.btnSaveTransaction.Location = new System.Drawing.Point(601, 120);
+            this.btnSaveTransaction.Name = "btnSaveTransaction";
+            this.btnSaveTransaction.Size = new System.Drawing.Size(147, 50);
+            this.btnSaveTransaction.TabIndex = 6;
+            this.btnSaveTransaction.Text = "Save Transaction";
+            this.btnSaveTransaction.UseVisualStyleBackColor = true;
+            this.btnSaveTransaction.Click += new System.EventHandler(this.btnSaveTransaction_Click);
             // 
             // lblTransactionString
             // 
@@ -140,7 +148,7 @@
             // 
             this.txtSourceIdentifier.Location = new System.Drawing.Point(118, 6);
             this.txtSourceIdentifier.Name = "txtSourceIdentifier";
-            this.txtSourceIdentifier.Size = new System.Drawing.Size(100, 20);
+            this.txtSourceIdentifier.Size = new System.Drawing.Size(156, 20);
             this.txtSourceIdentifier.TabIndex = 9;
             this.txtSourceIdentifier.TextChanged += new System.EventHandler(this.txtSourceIdentifier_TextChanged);
             // 
@@ -159,8 +167,9 @@
             this.cbxPaymentChannel.FormattingEnabled = true;
             this.cbxPaymentChannel.Location = new System.Drawing.Point(118, 92);
             this.cbxPaymentChannel.Name = "cbxPaymentChannel";
-            this.cbxPaymentChannel.Size = new System.Drawing.Size(100, 21);
+            this.cbxPaymentChannel.Size = new System.Drawing.Size(156, 21);
             this.cbxPaymentChannel.TabIndex = 11;
+            this.cbxPaymentChannel.SelectedIndexChanged += new System.EventHandler(this.cbxPaymentChannel_SelectedIndexChanged);
             // 
             // lblCreditCard
             // 
@@ -175,13 +184,14 @@
             // 
             this.txtCreditCard.Location = new System.Drawing.Point(118, 121);
             this.txtCreditCard.Name = "txtCreditCard";
-            this.txtCreditCard.Size = new System.Drawing.Size(100, 20);
+            this.txtCreditCard.Size = new System.Drawing.Size(156, 20);
             this.txtCreditCard.TabIndex = 13;
+            this.txtCreditCard.TextChanged += new System.EventHandler(this.txtCreditCard_TextChanged);
             // 
             // lblErrorCorrectionReason
             // 
             this.lblErrorCorrectionReason.AutoSize = true;
-            this.lblErrorCorrectionReason.Location = new System.Drawing.Point(258, 9);
+            this.lblErrorCorrectionReason.Location = new System.Drawing.Point(12, 156);
             this.lblErrorCorrectionReason.Name = "lblErrorCorrectionReason";
             this.lblErrorCorrectionReason.Size = new System.Drawing.Size(120, 13);
             this.lblErrorCorrectionReason.TabIndex = 14;
@@ -189,15 +199,16 @@
             // 
             // txtErrorCorrectionReason
             // 
-            this.txtErrorCorrectionReason.Location = new System.Drawing.Point(398, 6);
+            this.txtErrorCorrectionReason.Location = new System.Drawing.Point(152, 153);
             this.txtErrorCorrectionReason.Name = "txtErrorCorrectionReason";
-            this.txtErrorCorrectionReason.Size = new System.Drawing.Size(100, 20);
+            this.txtErrorCorrectionReason.Size = new System.Drawing.Size(122, 20);
             this.txtErrorCorrectionReason.TabIndex = 15;
+            this.txtErrorCorrectionReason.TextChanged += new System.EventHandler(this.txtErrorCorrectionReason_TextChanged);
             // 
             // lblPaymentDate
             // 
             this.lblPaymentDate.AutoSize = true;
-            this.lblPaymentDate.Location = new System.Drawing.Point(258, 65);
+            this.lblPaymentDate.Location = new System.Drawing.Point(320, 11);
             this.lblPaymentDate.Name = "lblPaymentDate";
             this.lblPaymentDate.Size = new System.Drawing.Size(74, 13);
             this.lblPaymentDate.TabIndex = 16;
@@ -206,16 +217,17 @@
             // dtpPaymentDate
             // 
             this.dtpPaymentDate.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.dtpPaymentDate.Location = new System.Drawing.Point(398, 62);
+            this.dtpPaymentDate.Location = new System.Drawing.Point(444, 4);
             this.dtpPaymentDate.Name = "dtpPaymentDate";
-            this.dtpPaymentDate.Size = new System.Drawing.Size(100, 20);
+            this.dtpPaymentDate.Size = new System.Drawing.Size(131, 20);
             this.dtpPaymentDate.TabIndex = 17;
-            this.dtpPaymentDate.Value = new System.DateTime(2019, 4, 27, 0, 6, 7, 0);
+            this.dtpPaymentDate.Value = new System.DateTime(2019, 5, 6, 0, 0, 0, 0);
+            this.dtpPaymentDate.ValueChanged += new System.EventHandler(this.dtpPaymentDate_ValueChanged);
             // 
             // lblPaymentTime
             // 
             this.lblPaymentTime.AutoSize = true;
-            this.lblPaymentTime.Location = new System.Drawing.Point(258, 98);
+            this.lblPaymentTime.Location = new System.Drawing.Point(320, 40);
             this.lblPaymentTime.Name = "lblPaymentTime";
             this.lblPaymentTime.Size = new System.Drawing.Size(74, 13);
             this.lblPaymentTime.TabIndex = 18;
@@ -224,32 +236,34 @@
             // dtpPaymentTime
             // 
             this.dtpPaymentTime.Format = System.Windows.Forms.DateTimePickerFormat.Time;
-            this.dtpPaymentTime.Location = new System.Drawing.Point(398, 92);
+            this.dtpPaymentTime.Location = new System.Drawing.Point(444, 34);
             this.dtpPaymentTime.Name = "dtpPaymentTime";
-            this.dtpPaymentTime.Size = new System.Drawing.Size(100, 20);
+            this.dtpPaymentTime.Size = new System.Drawing.Size(131, 20);
             this.dtpPaymentTime.TabIndex = 19;
+            this.dtpPaymentTime.Value = new System.DateTime(2019, 5, 6, 0, 43, 25, 0);
             // 
-            // label1
+            // lblSettlementDate
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(258, 127);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(83, 13);
-            this.label1.TabIndex = 20;
-            this.label1.Text = "Settlement Date";
+            this.lblSettlementDate.AutoSize = true;
+            this.lblSettlementDate.Location = new System.Drawing.Point(320, 69);
+            this.lblSettlementDate.Name = "lblSettlementDate";
+            this.lblSettlementDate.Size = new System.Drawing.Size(83, 13);
+            this.lblSettlementDate.TabIndex = 20;
+            this.lblSettlementDate.Text = "Settlement Date";
             // 
             // dtpSettlementDate
             // 
             this.dtpSettlementDate.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.dtpSettlementDate.Location = new System.Drawing.Point(398, 121);
+            this.dtpSettlementDate.Location = new System.Drawing.Point(444, 66);
             this.dtpSettlementDate.Name = "dtpSettlementDate";
-            this.dtpSettlementDate.Size = new System.Drawing.Size(100, 20);
+            this.dtpSettlementDate.Size = new System.Drawing.Size(131, 20);
             this.dtpSettlementDate.TabIndex = 21;
+            this.dtpSettlementDate.ValueChanged += new System.EventHandler(this.dtpSettlementDate_ValueChanged);
             // 
             // lblBankTransactionID
             // 
             this.lblBankTransactionID.AutoSize = true;
-            this.lblBankTransactionID.Location = new System.Drawing.Point(535, 9);
+            this.lblBankTransactionID.Location = new System.Drawing.Point(320, 97);
             this.lblBankTransactionID.Name = "lblBankTransactionID";
             this.lblBankTransactionID.Size = new System.Drawing.Size(105, 13);
             this.lblBankTransactionID.TabIndex = 22;
@@ -257,15 +271,16 @@
             // 
             // txtBankTransactionID
             // 
-            this.txtBankTransactionID.Location = new System.Drawing.Point(657, 6);
+            this.txtBankTransactionID.Location = new System.Drawing.Point(444, 93);
             this.txtBankTransactionID.Name = "txtBankTransactionID";
-            this.txtBankTransactionID.Size = new System.Drawing.Size(100, 20);
+            this.txtBankTransactionID.Size = new System.Drawing.Size(131, 20);
             this.txtBankTransactionID.TabIndex = 23;
+            this.txtBankTransactionID.TextChanged += new System.EventHandler(this.txtBankTransactionID_TextChanged);
             // 
             // lblAuthorisationCode
             // 
             this.lblAuthorisationCode.AutoSize = true;
-            this.lblAuthorisationCode.Location = new System.Drawing.Point(535, 36);
+            this.lblAuthorisationCode.Location = new System.Drawing.Point(320, 123);
             this.lblAuthorisationCode.Name = "lblAuthorisationCode";
             this.lblAuthorisationCode.Size = new System.Drawing.Size(96, 13);
             this.lblAuthorisationCode.TabIndex = 24;
@@ -273,15 +288,16 @@
             // 
             // txtAuthorisationCode
             // 
-            this.txtAuthorisationCode.Location = new System.Drawing.Point(657, 33);
+            this.txtAuthorisationCode.Location = new System.Drawing.Point(444, 120);
             this.txtAuthorisationCode.Name = "txtAuthorisationCode";
-            this.txtAuthorisationCode.Size = new System.Drawing.Size(100, 20);
+            this.txtAuthorisationCode.Size = new System.Drawing.Size(131, 20);
             this.txtAuthorisationCode.TabIndex = 25;
+            this.txtAuthorisationCode.TextChanged += new System.EventHandler(this.txtAuthorisationCode_TextChanged);
             // 
             // lblOriginalReference
             // 
             this.lblOriginalReference.AutoSize = true;
-            this.lblOriginalReference.Location = new System.Drawing.Point(535, 65);
+            this.lblOriginalReference.Location = new System.Drawing.Point(322, 152);
             this.lblOriginalReference.Name = "lblOriginalReference";
             this.lblOriginalReference.Size = new System.Drawing.Size(95, 13);
             this.lblOriginalReference.TabIndex = 26;
@@ -289,35 +305,66 @@
             // 
             // txtOriginalReference
             // 
-            this.txtOriginalReference.Location = new System.Drawing.Point(657, 62);
+            this.txtOriginalReference.Location = new System.Drawing.Point(444, 149);
             this.txtOriginalReference.Name = "txtOriginalReference";
-            this.txtOriginalReference.Size = new System.Drawing.Size(100, 20);
+            this.txtOriginalReference.Size = new System.Drawing.Size(131, 20);
             this.txtOriginalReference.TabIndex = 27;
-            // 
-            // btnResetTransaction
-            // 
-            this.btnResetTransaction.Location = new System.Drawing.Point(538, 118);
-            this.btnResetTransaction.Name = "btnResetTransaction";
-            this.btnResetTransaction.Size = new System.Drawing.Size(219, 23);
-            this.btnResetTransaction.TabIndex = 28;
-            this.btnResetTransaction.Text = "Reset Transaction";
-            this.btnResetTransaction.UseVisualStyleBackColor = true;
+            this.txtOriginalReference.TextChanged += new System.EventHandler(this.txtOriginalReference_TextChanged);
             // 
             // lstFile
             // 
             this.lstFile.FormattingEnabled = true;
-            this.lstFile.Location = new System.Drawing.Point(12, 172);
+            this.lstFile.HorizontalScrollbar = true;
+            this.lstFile.Location = new System.Drawing.Point(12, 224);
             this.lstFile.Name = "lstFile";
-            this.lstFile.Size = new System.Drawing.Size(486, 225);
+            this.lstFile.Size = new System.Drawing.Size(563, 173);
             this.lstFile.TabIndex = 29;
+            // 
+            // btnAddNewTransaction
+            // 
+            this.btnAddNewTransaction.Location = new System.Drawing.Point(601, 224);
+            this.btnAddNewTransaction.Name = "btnAddNewTransaction";
+            this.btnAddNewTransaction.Size = new System.Drawing.Size(147, 23);
+            this.btnAddNewTransaction.TabIndex = 30;
+            this.btnAddNewTransaction.Text = "Add Transaction";
+            this.btnAddNewTransaction.UseVisualStyleBackColor = true;
+            this.btnAddNewTransaction.Click += new System.EventHandler(this.btnAddNewTransaction_Click);
+            // 
+            // btnDeleteTransaction
+            // 
+            this.btnDeleteTransaction.Location = new System.Drawing.Point(601, 253);
+            this.btnDeleteTransaction.Name = "btnDeleteTransaction";
+            this.btnDeleteTransaction.Size = new System.Drawing.Size(147, 23);
+            this.btnDeleteTransaction.TabIndex = 31;
+            this.btnDeleteTransaction.Text = "Delete Transaction";
+            this.btnDeleteTransaction.UseVisualStyleBackColor = true;
+            this.btnDeleteTransaction.Click += new System.EventHandler(this.btnDeleteTransaction_Click);
+            // 
+            // btnSaveToFile
+            // 
+            this.btnSaveToFile.Location = new System.Drawing.Point(602, 374);
+            this.btnSaveToFile.Name = "btnSaveToFile";
+            this.btnSaveToFile.Size = new System.Drawing.Size(147, 23);
+            this.btnSaveToFile.TabIndex = 32;
+            this.btnSaveToFile.Text = "Save to File";
+            this.btnSaveToFile.UseVisualStyleBackColor = true;
+            this.btnSaveToFile.Click += new System.EventHandler(this.btnSaveToFile_Click);
+            // 
+            // SaveFileDialog
+            // 
+            this.SaveFileDialog.DefaultExt = "txt";
+            this.SaveFileDialog.Title = "Save NAB Multi-Account File";
+            this.SaveFileDialog.FileOk += new System.ComponentModel.CancelEventHandler(this.SaveFileDialog_FileOk);
             // 
             // frmMainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(782, 410);
+            this.ClientSize = new System.Drawing.Size(761, 410);
+            this.Controls.Add(this.btnSaveToFile);
+            this.Controls.Add(this.btnDeleteTransaction);
+            this.Controls.Add(this.btnAddNewTransaction);
             this.Controls.Add(this.lstFile);
-            this.Controls.Add(this.btnResetTransaction);
             this.Controls.Add(this.txtOriginalReference);
             this.Controls.Add(this.lblOriginalReference);
             this.Controls.Add(this.txtAuthorisationCode);
@@ -325,7 +372,7 @@
             this.Controls.Add(this.txtBankTransactionID);
             this.Controls.Add(this.lblBankTransactionID);
             this.Controls.Add(this.dtpSettlementDate);
-            this.Controls.Add(this.label1);
+            this.Controls.Add(this.lblSettlementDate);
             this.Controls.Add(this.dtpPaymentTime);
             this.Controls.Add(this.lblPaymentTime);
             this.Controls.Add(this.dtpPaymentDate);
@@ -339,7 +386,7 @@
             this.Controls.Add(this.txtSourceIdentifier);
             this.Controls.Add(this.lblSourceIdentifier);
             this.Controls.Add(this.lblTransactionString);
-            this.Controls.Add(this.btnAddTransaction);
+            this.Controls.Add(this.btnSaveTransaction);
             this.Controls.Add(this.txtAmount);
             this.Controls.Add(this.lblAmount);
             this.Controls.Add(this.cbxPaymentInstruction);
@@ -361,7 +408,7 @@
         private System.Windows.Forms.ComboBox cbxPaymentInstruction;
         private System.Windows.Forms.Label lblAmount;
         private System.Windows.Forms.TextBox txtAmount;
-        private System.Windows.Forms.Button btnAddTransaction;
+        private System.Windows.Forms.Button btnSaveTransaction;
         private System.Windows.Forms.Label lblTransactionString;
         private System.Windows.Forms.Label lblSourceIdentifier;
         private System.Windows.Forms.TextBox txtSourceIdentifier;
@@ -374,8 +421,7 @@
         private System.Windows.Forms.Label lblPaymentDate;
         private System.Windows.Forms.DateTimePicker dtpPaymentDate;
         private System.Windows.Forms.Label lblPaymentTime;
-        private System.Windows.Forms.DateTimePicker dtpPaymentTime;
-        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label lblSettlementDate;
         private System.Windows.Forms.DateTimePicker dtpSettlementDate;
         private System.Windows.Forms.Label lblBankTransactionID;
         private System.Windows.Forms.TextBox txtBankTransactionID;
@@ -383,8 +429,12 @@
         private System.Windows.Forms.TextBox txtAuthorisationCode;
         private System.Windows.Forms.Label lblOriginalReference;
         private System.Windows.Forms.TextBox txtOriginalReference;
-        private System.Windows.Forms.Button btnResetTransaction;
         private System.Windows.Forms.ListBox lstFile;
+        private System.Windows.Forms.Button btnAddNewTransaction;
+        private System.Windows.Forms.Button btnDeleteTransaction;
+        private System.Windows.Forms.Button btnSaveToFile;
+        private System.Windows.Forms.SaveFileDialog SaveFileDialog;
+        private System.Windows.Forms.DateTimePicker dtpPaymentTime;
     }
 }
 

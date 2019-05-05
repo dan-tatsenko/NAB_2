@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.IO;
 
 namespace NAB_MVC.Models
 {
@@ -23,14 +24,16 @@ namespace NAB_MVC.Models
         };
 
         private List<Transaction> TransactionList;
-        private bool CurrentTransactionSaved;
-        private int CurrentTransactionIndex;
+
+        public int Index { get; private set; }
         public int Count => TransactionList.Count;
+        public bool Saved { get; set; }
 
         public NABFile()
         {
             TransactionList = new List<Transaction>();
-            CurrentTransactionIndex = -1;
+            Index = -1;
+            Saved = true;
         }
 
         public Transaction this[int index]
@@ -39,10 +42,10 @@ namespace NAB_MVC.Models
             set => TransactionList[index] = value;
         }
 
-        public void Add(Transaction transaction)
+        public void Add ()
         {
-            TransactionList.Add(transaction);
-            CurrentTransactionSaved = false;
+            TransactionList.Add(new Transaction());
+            Index = Count - 1;
         }
 
         public List<string> ExportToList()
@@ -60,13 +63,22 @@ namespace NAB_MVC.Models
             if (index>=0 && index<Count)
             {
                 TransactionList.RemoveAt(index);
-                CurrentTransactionIndex = Count - 1;
+                Index = Count - 1;
             }
         }
 
         public void SaveToFile(string path)
         {
-            throw new NotImplementedException();
+            FileStream f = File.Create(path);
+            f.Close();
+            using (StreamWriter sw = new StreamWriter(path, false, System.Text.Encoding.Default))
+            {
+                foreach (string line in ExportToList())
+                {
+                    sw.WriteLine(line);
+                }
+                
+            }
         }
 
         public decimal TotalTransactionAmount()
@@ -79,12 +91,22 @@ namespace NAB_MVC.Models
             return r;
         }
 
+        public string GetPaymentInstructionDescription(string code)
+        {
+            return PaymentInstructions[code];
+        }
+
+        public string GetPaymentChannelDescription (string code)
+        {
+            return PaymentChannels[code];
+        }
+
         public List<string> GetPaymentInstructionsList()
         {
             List<string> list = new List<string>();
-            foreach (string code in PaymentInstructions.Keys)
+            foreach (KeyValuePair<string, string> keyValue in PaymentInstructions)
             {
-                list.Add(PaymentInstructions.[code]);
+                list.Add(keyValue.Value);
             }
             return list;
         }
@@ -92,11 +114,21 @@ namespace NAB_MVC.Models
         public List<string> GetPaymentChannelsList()
         {
             List<string> list = new List<string>();
-            foreach (string code in PaymentChannels.Keys)
+            foreach (KeyValuePair<string, string> keyValue in PaymentChannels)
             {
-                list.Add(PaymentChannels.[code]);
+                list.Add(keyValue.Value);
             }
             return list;
+        }
+
+        public string GetPaymentInstructionCode(string desc)
+        {
+            return PaymentInstructions.FirstOrDefault(x => x.Value == desc).Key;
+        }
+
+        public string GetPaymentChannelCode(string desc)
+        {
+            return PaymentChannels.FirstOrDefault(x => x.Value == desc).Key;
         }
     }
 }

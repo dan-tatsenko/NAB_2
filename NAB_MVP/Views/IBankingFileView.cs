@@ -6,9 +6,14 @@ using System.Threading.Tasks;
 
 namespace NAB_MVC.Views
 {
-    public class TransactionEventArgs : EventArgs
+    public class SavingFileEventArgs : EventArgs
     {
+        public string Path { get; set; }
 
+        public SavingFileEventArgs(string path)
+        {
+            Path = path;
+        }
     }
     public interface IBankingFileView
     {
@@ -30,7 +35,11 @@ namespace NAB_MVC.Views
 
         void FillPaymentInstructions(List<string> list);
         void FillTransactionChannels(List<string> list);
+        void FillList(List<string> list, int selected);
 
-        event EventHandler FileViewChanged;
+        event EventHandler AddTransactionRequested;
+        event EventHandler SaveTransacationRequested;
+        event EventHandler ViewChanged;
+        event EventHandler<SavingFileEventArgs> SaveFileRequested;
     }
 }

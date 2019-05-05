@@ -9,13 +9,19 @@ namespace NAB_MVC.Models
     public interface IBankingFile
     {
         int Count { get; }
-        void Add(Transaction transaction);
+        int Index { get; }
+        bool Saved { get; set; }
+
+        void Add();
         void Remove(int index);
         Transaction this [int index] {get; set;}
 
         List<string> GetPaymentInstructionsList();
         List<string> GetPaymentChannelsList();
-
+        string GetPaymentInstructionDescription(string code);
+        string GetPaymentChannelDescription(string code);
+        string GetPaymentInstructionCode(string desc);
+        string GetPaymentChannelCode(string desc);
         decimal TotalTransactionAmount();
         void SaveToFile(string path);
         List<string> ExportToList();
