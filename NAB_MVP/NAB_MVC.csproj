@@ -54,7 +54,7 @@
     </Compile>
     <Compile Include="Models\IBankingFile.cs" />
     <Compile Include="Models\ITransaction.cs" />
-    <Compile Include="Models\NABFile.cs" />
+    <Compile Include="Models\BankingFile.cs" />
     <Compile Include="Models\Transaction.cs" />
     <Compile Include="Controllers\ApplicationController.cs" />
     <Compile Include="Program.cs" />

@@ -16,7 +16,7 @@ namespace NAB_MVC
         [STAThread]
         static void Main()
         {
-            NABFile File = new NABFile();
+            BankingFile File = new BankingFile();
             frmMainForm Form;
             ApplicationController Controller;
 

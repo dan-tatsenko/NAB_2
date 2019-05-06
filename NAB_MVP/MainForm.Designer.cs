@@ -66,6 +66,8 @@
             // lblAccountNumber
             // 
             this.lblAccountNumber.AutoSize = true;
+            this.lblAccountNumber.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblAccountNumber.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(192)))));
             this.lblAccountNumber.Location = new System.Drawing.Point(12, 36);
             this.lblAccountNumber.Name = "lblAccountNumber";
             this.lblAccountNumber.Size = new System.Drawing.Size(87, 13);
@@ -84,6 +86,7 @@
             // lblPaymentInstruction
             // 
             this.lblPaymentInstruction.AutoSize = true;
+            this.lblPaymentInstruction.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(192)))));
             this.lblPaymentInstruction.Location = new System.Drawing.Point(12, 68);
             this.lblPaymentInstruction.Name = "lblPaymentInstruction";
             this.lblPaymentInstruction.Size = new System.Drawing.Size(100, 13);
@@ -103,6 +106,7 @@
             // lblAmount
             // 
             this.lblAmount.AutoSize = true;
+            this.lblAmount.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(192)))));
             this.lblAmount.Location = new System.Drawing.Point(12, 183);
             this.lblAmount.Name = "lblAmount";
             this.lblAmount.Size = new System.Drawing.Size(43, 13);
@@ -155,6 +159,7 @@
             // lblPaymentChanell
             // 
             this.lblPaymentChanell.AutoSize = true;
+            this.lblPaymentChanell.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(192)))));
             this.lblPaymentChanell.Location = new System.Drawing.Point(12, 98);
             this.lblPaymentChanell.Name = "lblPaymentChanell";
             this.lblPaymentChanell.Size = new System.Drawing.Size(90, 13);
@@ -208,6 +213,7 @@
             // lblPaymentDate
             // 
             this.lblPaymentDate.AutoSize = true;
+            this.lblPaymentDate.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(192)))));
             this.lblPaymentDate.Location = new System.Drawing.Point(320, 11);
             this.lblPaymentDate.Name = "lblPaymentDate";
             this.lblPaymentDate.Size = new System.Drawing.Size(74, 13);

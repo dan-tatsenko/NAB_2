@@ -7,7 +7,7 @@ using System.IO;
 
 namespace NAB_MVC.Models
 {
-    public class NABFile : IBankingFile
+    public class BankingFile : IBankingFile
     {
         private Dictionary<string, string> PaymentInstructions = new Dictionary<string, string>
         {
@@ -29,7 +29,7 @@ namespace NAB_MVC.Models
         public int Count => TransactionList.Count;
         public bool Saved { get; set; }
 
-        public NABFile()
+        public BankingFile()
         {
             TransactionList = new List<Transaction>();
             Index = -1;
