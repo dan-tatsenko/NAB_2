@@ -20,6 +20,7 @@ namespace NAB_MVC
         public event EventHandler ViewChanged;
         public event EventHandler SaveTransacationRequested;
         public event EventHandler<SavingFileEventArgs> SaveFileRequested;
+        public event EventHandler DeleteTransactionRequested;
 
         public frmMainForm()
         {
@@ -79,6 +80,21 @@ namespace NAB_MVC
         private void btnAddNewTransaction_Click(object sender, EventArgs e)
         {
             AddTransactionRequested(this, new EventArgs());
+            lstFile.Enabled = true;
+            txtAccountNumber.Enabled = true;
+            txtAmount.Enabled = true;
+            txtAuthorisationCode.Enabled = true;
+            txtBankTransactionID.Enabled = true;
+            txtCreditCard.Enabled = true;
+            txtErrorCorrectionReason.Enabled = true;
+            txtOriginalReference.Enabled = true;
+            txtSourceIdentifier.Enabled = true;
+            dtpPaymentDate.Enabled = true;
+            dtpPaymentTime.Enabled = true;
+            dtpSettlementDate.Enabled = true;
+            cbxPaymentChannel.Enabled = true;
+            cbxPaymentInstruction.Enabled = true;
+            btnSaveTransaction.Enabled = true;
         }
 
         public void FillList(List<string> list, int selected)
@@ -158,7 +174,7 @@ namespace NAB_MVC
 
         private void btnDeleteTransaction_Click(object sender, EventArgs e)
         {
-
+            DeleteTransactionRequested(this, new EventArgs());
         }
 
         private void btnSaveToFile_Click(object sender, EventArgs e)

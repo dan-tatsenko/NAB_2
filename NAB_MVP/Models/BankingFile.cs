@@ -63,7 +63,10 @@ namespace NAB_MVC.Models
             if (index>=0 && index<Count)
             {
                 TransactionList.RemoveAt(index);
-                Index = Count - 1;
+                if (Count=1)
+                {
+
+                }
             }
         }
 
@@ -76,8 +79,7 @@ namespace NAB_MVC.Models
                 foreach (string line in ExportToList())
                 {
                     sw.WriteLine(line);
-                }
-                
+                }  
             }
         }
 

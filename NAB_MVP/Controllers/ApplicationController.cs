@@ -25,6 +25,16 @@ namespace NAB_MVC.Controllers
             View.ViewChanged += View_ViewChanged;
             View.SaveTransacationRequested += View_SaveTransacationRequested;
             View.SaveFileRequested += View_SaveFileRequested;
+            View.DeleteTransactionRequested += View_DeleteTransactionRequested;
+        }
+
+        private void View_DeleteTransactionRequested(object sender, EventArgs e)
+        {
+            BankingFile.Remove(BankingFile.Index);
+            if ()
+            {
+
+            }
         }
 
         private void View_SaveFileRequested(object sender, SavingFileEventArgs e)

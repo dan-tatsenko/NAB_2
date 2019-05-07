@@ -7,7 +7,7 @@ using NAB_MVC.Views;
 
 namespace NAB_MVC.Models
 {
-    public class Transaction : ITransaction
+    public class Transaction
     {
         public Transaction()
         {
@@ -22,9 +22,9 @@ namespace NAB_MVC.Models
             amount = 0;
             paymentDateTime = DateTime.Today;
             settlementDate = DateTime.Today;
-            bankTransactionID = "NAB0000";
+            bankTransactionID = "NAB" + r.Next(1000, 9999).ToString(); ;
             authorisationCode = r.Next(1000, 9999).ToString(); ;
-            originalReference = "Testing Bank File";
+            originalReference = "TestingBankFile";
         }
 
       
@@ -198,7 +198,7 @@ namespace NAB_MVC.Models
             r += bankTransactionID.PadRight(30);
             r += authorisationCode.PadRight(6);
             r += originalReference.PadRight(20);
-            r = r.PadRight(50);   
+            r = r.PadRight(219);   
             return r;
         }
     }
