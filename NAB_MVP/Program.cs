@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using NAB_MVC.Models;
 using NAB_MVC.Controllers;
@@ -16,12 +13,13 @@ namespace NAB_MVC
         [STAThread]
         static void Main()
         {
-            BankingFile File = new BankingFile();
+            BankingFile File;
             frmMainForm Form;
             ApplicationController Controller;
 
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
+            File = new BankingFile();
             Form = new frmMainForm();
             Controller = new ApplicationController(Form, File);
             Application.Run(Form);

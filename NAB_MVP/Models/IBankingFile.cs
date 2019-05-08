@@ -9,7 +9,7 @@ namespace NAB_MVC.Models
     public interface IBankingFile
     {
         int Count { get; }
-        int Index { get; }
+        int Index { get; set; }
         bool Saved { get; set; }
 
         void Add();

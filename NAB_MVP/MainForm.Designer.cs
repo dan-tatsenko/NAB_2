@@ -77,7 +77,6 @@
             // txtAccountNumber
             // 
             this.txtAccountNumber.AllowDrop = true;
-            this.txtAccountNumber.Enabled = false;
             this.txtAccountNumber.Location = new System.Drawing.Point(118, 33);
             this.txtAccountNumber.Name = "txtAccountNumber";
             this.txtAccountNumber.Size = new System.Drawing.Size(156, 20);
@@ -97,7 +96,6 @@
             // cbxPaymentInstruction
             // 
             this.cbxPaymentInstruction.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cbxPaymentInstruction.Enabled = false;
             this.cbxPaymentInstruction.FormattingEnabled = true;
             this.cbxPaymentInstruction.Location = new System.Drawing.Point(118, 62);
             this.cbxPaymentInstruction.Name = "cbxPaymentInstruction";
@@ -117,7 +115,6 @@
             // 
             // txtAmount
             // 
-            this.txtAmount.Enabled = false;
             this.txtAmount.Location = new System.Drawing.Point(118, 178);
             this.txtAmount.Name = "txtAmount";
             this.txtAmount.Size = new System.Drawing.Size(156, 20);
@@ -126,7 +123,6 @@
             // 
             // btnSaveTransaction
             // 
-            this.btnSaveTransaction.Enabled = false;
             this.btnSaveTransaction.Location = new System.Drawing.Point(325, 175);
             this.btnSaveTransaction.Name = "btnSaveTransaction";
             this.btnSaveTransaction.Size = new System.Drawing.Size(250, 25);
@@ -154,7 +150,6 @@
             // 
             // txtSourceIdentifier
             // 
-            this.txtSourceIdentifier.Enabled = false;
             this.txtSourceIdentifier.Location = new System.Drawing.Point(118, 6);
             this.txtSourceIdentifier.Name = "txtSourceIdentifier";
             this.txtSourceIdentifier.Size = new System.Drawing.Size(156, 20);
@@ -174,7 +169,6 @@
             // cbxPaymentChannel
             // 
             this.cbxPaymentChannel.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cbxPaymentChannel.Enabled = false;
             this.cbxPaymentChannel.FormattingEnabled = true;
             this.cbxPaymentChannel.Location = new System.Drawing.Point(118, 92);
             this.cbxPaymentChannel.Name = "cbxPaymentChannel";
@@ -193,7 +187,6 @@
             // 
             // txtCreditCard
             // 
-            this.txtCreditCard.Enabled = false;
             this.txtCreditCard.Location = new System.Drawing.Point(118, 121);
             this.txtCreditCard.Name = "txtCreditCard";
             this.txtCreditCard.Size = new System.Drawing.Size(156, 20);
@@ -211,7 +204,6 @@
             // 
             // txtErrorCorrectionReason
             // 
-            this.txtErrorCorrectionReason.Enabled = false;
             this.txtErrorCorrectionReason.Location = new System.Drawing.Point(118, 149);
             this.txtErrorCorrectionReason.Name = "txtErrorCorrectionReason";
             this.txtErrorCorrectionReason.Size = new System.Drawing.Size(156, 20);
@@ -230,7 +222,6 @@
             // 
             // dtpPaymentDate
             // 
-            this.dtpPaymentDate.Enabled = false;
             this.dtpPaymentDate.Format = System.Windows.Forms.DateTimePickerFormat.Short;
             this.dtpPaymentDate.Location = new System.Drawing.Point(444, 5);
             this.dtpPaymentDate.Name = "dtpPaymentDate";
@@ -250,7 +241,6 @@
             // 
             // dtpPaymentTime
             // 
-            this.dtpPaymentTime.Enabled = false;
             this.dtpPaymentTime.Format = System.Windows.Forms.DateTimePickerFormat.Time;
             this.dtpPaymentTime.Location = new System.Drawing.Point(444, 34);
             this.dtpPaymentTime.Name = "dtpPaymentTime";
@@ -269,7 +259,6 @@
             // 
             // dtpSettlementDate
             // 
-            this.dtpSettlementDate.Enabled = false;
             this.dtpSettlementDate.Format = System.Windows.Forms.DateTimePickerFormat.Short;
             this.dtpSettlementDate.Location = new System.Drawing.Point(444, 63);
             this.dtpSettlementDate.Name = "dtpSettlementDate";
@@ -289,7 +278,6 @@
             // 
             // txtBankTransactionID
             // 
-            this.txtBankTransactionID.Enabled = false;
             this.txtBankTransactionID.Location = new System.Drawing.Point(444, 93);
             this.txtBankTransactionID.Name = "txtBankTransactionID";
             this.txtBankTransactionID.Size = new System.Drawing.Size(131, 20);
@@ -307,7 +295,6 @@
             // 
             // txtAuthorisationCode
             // 
-            this.txtAuthorisationCode.Enabled = false;
             this.txtAuthorisationCode.Location = new System.Drawing.Point(444, 120);
             this.txtAuthorisationCode.Name = "txtAuthorisationCode";
             this.txtAuthorisationCode.Size = new System.Drawing.Size(131, 20);
@@ -325,7 +312,6 @@
             // 
             // txtOriginalReference
             // 
-            this.txtOriginalReference.Enabled = false;
             this.txtOriginalReference.Location = new System.Drawing.Point(444, 149);
             this.txtOriginalReference.Name = "txtOriginalReference";
             this.txtOriginalReference.Size = new System.Drawing.Size(131, 20);
@@ -334,13 +320,13 @@
             // 
             // lstFile
             // 
-            this.lstFile.Enabled = false;
             this.lstFile.FormattingEnabled = true;
             this.lstFile.HorizontalScrollbar = true;
             this.lstFile.Location = new System.Drawing.Point(12, 224);
             this.lstFile.Name = "lstFile";
             this.lstFile.Size = new System.Drawing.Size(737, 173);
             this.lstFile.TabIndex = 29;
+            this.lstFile.SelectedIndexChanged += new System.EventHandler(this.lstFile_SelectedIndexChanged);
             // 
             // btnAddNewTransaction
             // 

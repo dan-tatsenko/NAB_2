@@ -15,6 +15,28 @@ namespace NAB_MVC.Views
             Path = path;
         }
     }
+
+    public class DeletingTransactionEventArg: EventArgs
+    {
+        public DeletingTransactionEventArg(int deletingIndex)
+        {
+            DeletingIndex = deletingIndex;
+        }
+
+        public int DeletingIndex { get; }
+
+    }
+
+    public class SelectedIndexChangedEventArg: EventArgs
+    {
+        public SelectedIndexChangedEventArg(int newIndex)
+        {
+            NewIndex = newIndex;
+        }
+
+        public  int NewIndex { get; }
+    }
+
     public interface IBankingFileView
     {
         string SourceIdetifierText { get; set; }
@@ -31,16 +53,19 @@ namespace NAB_MVC.Views
         string AuthorisationCodeText { get; set; }
         string OriginalRefText { get; set; }
 
+        bool EnabledView { get; set; }
         string TransactionLine { get; set; }
 
         void FillPaymentInstructions(List<string> list);
         void FillTransactionChannels(List<string> list);
         void FillList(List<string> list, int selected);
+        void ClearView();
 
         event EventHandler AddTransactionRequested;
         event EventHandler SaveTransacationRequested;
-        event EventHandler DeleteTransactionRequested;
+        event EventHandler<DeletingTransactionEventArg> DeleteTransactionRequested;
         event EventHandler ViewChanged;
         event EventHandler<SavingFileEventArgs> SaveFileRequested;
+        event EventHandler<SelectedIndexChangedEventArg> SelectedIndexChanged;
     }
 }

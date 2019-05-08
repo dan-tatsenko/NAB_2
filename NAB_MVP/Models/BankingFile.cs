@@ -25,7 +25,7 @@ namespace NAB_MVC.Models
 
         private List<Transaction> TransactionList;
 
-        public int Index { get; private set; }
+        public int Index { get; set; }
         public int Count => TransactionList.Count;
         public bool Saved { get; set; }
 
@@ -60,13 +60,15 @@ namespace NAB_MVC.Models
 
         public void Remove(int index)
         {
-            if (index>=0 && index<Count)
+            if (index >= 0 && index < Count)
             {
-                TransactionList.RemoveAt(index);
-                if (Count=1)
-                {
+                Index = index;
 
+                if (index==Count-1) //Unlese we delete last element
+                {
+                    Index = index - 1; //new index will be 1 less
                 }
+                TransactionList.RemoveAt(index);
             }
         }
 

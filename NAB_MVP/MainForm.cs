@@ -8,8 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using NAB_MVC.Views;
-using NAB_MVC.Models;
-using NAB_MVC.Controllers;
+
 
 namespace NAB_MVC
 {
@@ -20,7 +19,8 @@ namespace NAB_MVC
         public event EventHandler ViewChanged;
         public event EventHandler SaveTransacationRequested;
         public event EventHandler<SavingFileEventArgs> SaveFileRequested;
-        public event EventHandler DeleteTransactionRequested;
+        public event EventHandler<DeletingTransactionEventArg> DeleteTransactionRequested;
+        public event EventHandler<SelectedIndexChangedEventArg> SelectedIndexChanged;
 
         public frmMainForm()
         {
@@ -60,6 +60,30 @@ namespace NAB_MVC
         public string BankTransactionIDText { get => txtBankTransactionID.Text; set => txtBankTransactionID.Text = value; }
         public string AuthorisationCodeText { get => txtAuthorisationCode.Text; set => txtAuthorisationCode.Text = value; }
         public string OriginalRefText { get => txtOriginalReference.Text; set => txtOriginalReference.Text = value; }
+        public bool EnabledView
+        {
+            get => EnabledView;
+            set
+            {
+                EnabledView = value;
+
+                lstFile.Enabled = value;
+                txtAccountNumber.Enabled = value;
+                txtAmount.Enabled = value;
+                txtAuthorisationCode.Enabled = value;
+                txtBankTransactionID.Enabled = value;
+                txtCreditCard.Enabled = value;
+                txtErrorCorrectionReason.Enabled = value;
+                txtOriginalReference.Enabled = value;
+                txtSourceIdentifier.Enabled = value;
+                dtpPaymentDate.Enabled = value;
+                dtpPaymentTime.Enabled = value;
+                dtpSettlementDate.Enabled = value;
+                cbxPaymentChannel.Enabled = value;
+                cbxPaymentInstruction.Enabled = value;
+                btnSaveTransaction.Enabled = value;
+            }
+        }
 
         public void FillTransactionChannels(List<string> list)
         {
@@ -80,21 +104,6 @@ namespace NAB_MVC
         private void btnAddNewTransaction_Click(object sender, EventArgs e)
         {
             AddTransactionRequested(this, new EventArgs());
-            lstFile.Enabled = true;
-            txtAccountNumber.Enabled = true;
-            txtAmount.Enabled = true;
-            txtAuthorisationCode.Enabled = true;
-            txtBankTransactionID.Enabled = true;
-            txtCreditCard.Enabled = true;
-            txtErrorCorrectionReason.Enabled = true;
-            txtOriginalReference.Enabled = true;
-            txtSourceIdentifier.Enabled = true;
-            dtpPaymentDate.Enabled = true;
-            dtpPaymentTime.Enabled = true;
-            dtpSettlementDate.Enabled = true;
-            cbxPaymentChannel.Enabled = true;
-            cbxPaymentInstruction.Enabled = true;
-            btnSaveTransaction.Enabled = true;
         }
 
         public void FillList(List<string> list, int selected)
@@ -174,7 +183,7 @@ namespace NAB_MVC
 
         private void btnDeleteTransaction_Click(object sender, EventArgs e)
         {
-            DeleteTransactionRequested(this, new EventArgs());
+            DeleteTransactionRequested(this, new DeletingTransactionEventArg(lstFile.SelectedIndex));
         }
 
         private void btnSaveToFile_Click(object sender, EventArgs e)
@@ -188,6 +197,27 @@ namespace NAB_MVC
             SaveFileRequested(this, args);
         }
 
+        private void lstFile_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            SelectedIndexChanged(this, new SelectedIndexChangedEventArg(lstFile.SelectedIndex));
+        }
 
+        public void ClearView()
+        {
+            lstFile.Items.Clear();
+            txtAccountNumber.Text = "";
+            txtAmount.Text = "";
+            txtAuthorisationCode.Text = "";
+            txtBankTransactionID.Text = "";
+            txtCreditCard.Text = "";
+            txtErrorCorrectionReason.Text = "";
+            txtOriginalReference.Text = "";
+            txtSourceIdentifier.Text = "";
+            dtpPaymentDate.Value = DateTime.Today;
+            dtpPaymentTime.Value = DateTime.Now;
+            dtpSettlementDate.Value = DateTime.Today;
+            cbxPaymentChannel.SelectedIndex = 0;
+            cbxPaymentInstruction.SelectedIndex = 0;
+        }
     }
 }
