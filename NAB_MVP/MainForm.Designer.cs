@@ -324,6 +324,7 @@
             this.lstFile.HorizontalScrollbar = true;
             this.lstFile.Location = new System.Drawing.Point(12, 224);
             this.lstFile.Name = "lstFile";
+            this.lstFile.ScrollAlwaysVisible = true;
             this.lstFile.Size = new System.Drawing.Size(737, 173);
             this.lstFile.TabIndex = 29;
             this.lstFile.SelectedIndexChanged += new System.EventHandler(this.lstFile_SelectedIndexChanged);

@@ -58,7 +58,7 @@ namespace NAB_MVC.Views
 
         void FillPaymentInstructions(List<string> list);
         void FillTransactionChannels(List<string> list);
-        void FillList(List<string> list, int selected);
+        void FillList(List<string> list);
         void ClearView();
 
         event EventHandler AddTransactionRequested;

@@ -21,7 +21,7 @@ namespace NAB_MVC
         public event EventHandler<SavingFileEventArgs> SaveFileRequested;
         public event EventHandler<DeletingTransactionEventArg> DeleteTransactionRequested;
         public event EventHandler<SelectedIndexChangedEventArg> SelectedIndexChanged;
-
+        private bool enabledView;
         public frmMainForm()
         {
             InitializeComponent();
@@ -62,10 +62,10 @@ namespace NAB_MVC
         public string OriginalRefText { get => txtOriginalReference.Text; set => txtOriginalReference.Text = value; }
         public bool EnabledView
         {
-            get => EnabledView;
+            get => enabledView;
             set
             {
-                EnabledView = value;
+                enabledView = value;
 
                 lstFile.Enabled = value;
                 txtAccountNumber.Enabled = value;
@@ -106,14 +106,13 @@ namespace NAB_MVC
             AddTransactionRequested(this, new EventArgs());
         }
 
-        public void FillList(List<string> list, int selected)
+        public void FillList(List<string> list)
         {
             lstFile.Items.Clear();
             foreach (string line in list)
             {
                 lstFile.Items.Add(line);
             }
-            lstFile.SelectedIndex = selected;
         }
 
         private void txtAccountNumber_TextChanged(object sender, EventArgs e)

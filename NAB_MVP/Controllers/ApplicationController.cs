@@ -35,30 +35,31 @@ namespace NAB_MVC.Controllers
             if (!BankingFile.Saved)
             {
                 UpdateBankingFile();
+                View.FillList(BankingFile.ExportToList());
             }
             BankingFile.Index = e.NewIndex;
-            UpdateView();
-            View.FillList(BankingFile.ExportToList(), BankingFile.Index);
+            UpdateView();  
         }
 
         private void View_DeleteTransactionRequested(object sender, DeletingTransactionEventArg deletingTransactionEventArg)
         {
             BankingFile.Remove(deletingTransactionEventArg.DeletingIndex);
             UpdateView();
+            View.FillList(BankingFile.ExportToList());
             BankingFile.Saved = true;
         }
 
         private void View_SaveFileRequested(object sender, SavingFileEventArgs e)
         {
             UpdateBankingFile();
-            View.FillList(BankingFile.ExportToList(), BankingFile.Index);
+            View.FillList(BankingFile.ExportToList());
             BankingFile.SaveToFile(e.Path);  
         }
 
         private void View_SaveTransacationRequested(object sender, EventArgs e)
         {
             UpdateBankingFile();
-            View.FillList(BankingFile.ExportToList(), BankingFile.Index);
+            View.FillList(BankingFile.ExportToList());
         }
 
         private void View_ViewChanged(object sender, EventArgs e)
@@ -82,6 +83,7 @@ namespace NAB_MVC.Controllers
             }
             BankingFile.Add();
             UpdateView();
+            View.FillList(BankingFile.ExportToList());
             BankingFile.Saved = true;
         }
 
@@ -103,7 +105,8 @@ namespace NAB_MVC.Controllers
                 View.BankTransactionIDText = BankingFile[i].BankTransactionID;
                 View.AuthorisationCodeText = BankingFile[i].AuthorisationCode;
                 View.OriginalRefText = BankingFile[i].OriginalReference;
-                View.FillList(BankingFile.ExportToList(), BankingFile.Index);
+                BankingFile.Saved = true;
+                //View.FillList(BankingFile.ExportToList());
             }
             else
             {
@@ -115,22 +118,25 @@ namespace NAB_MVC.Controllers
         public void UpdateBankingFile()
         {
             int i = BankingFile.Index;
+            if (i >= 0)
+            {
 
-            BankingFile[i].SourceIdentifier = View.SourceIdetifierText;
-            BankingFile[i].AccountNumber = View.AccountNumberText;
-            BankingFile[i].PaymentInstruction = BankingFile.GetPaymentInstructionCode(View.PaymentInstructionText);
-            BankingFile[i].PaymentChannel = BankingFile.GetPaymentChannelCode(View.PaymentChannelText);
-            BankingFile[i].ErrorCorrectionCode = View.ErrorCorrectionReasonText;
-            decimal a = 0m;
-            decimal.TryParse(View.AmountText, out a);
-            BankingFile[i].Amount = a * 100;
-            BankingFile[i].PaymentDateTime = View.PaymentDate.Date;
-            BankingFile[i].PaymentDateTime = View.PaymentTime;
-            BankingFile[i].SettlementDate = View.SettlementTime;
-            BankingFile[i].BankTransactionID = View.BankTransactionIDText;
-            BankingFile[i].AuthorisationCode = View.AuthorisationCodeText;
-            BankingFile[i].OriginalReference = View.OriginalRefText;
-            BankingFile.Saved = true;
+                BankingFile[i].SourceIdentifier = View.SourceIdetifierText;
+                BankingFile[i].AccountNumber = View.AccountNumberText;
+                BankingFile[i].PaymentInstruction = BankingFile.GetPaymentInstructionCode(View.PaymentInstructionText);
+                BankingFile[i].PaymentChannel = BankingFile.GetPaymentChannelCode(View.PaymentChannelText);
+                BankingFile[i].ErrorCorrectionCode = View.ErrorCorrectionReasonText;
+                decimal a = 0m;
+                decimal.TryParse(View.AmountText, out a);
+                BankingFile[i].Amount = a * 100;
+                BankingFile[i].PaymentDateTime = View.PaymentDate.Date;
+                BankingFile[i].PaymentDateTime = View.PaymentTime;
+                BankingFile[i].SettlementDate = View.SettlementTime;
+                BankingFile[i].BankTransactionID = View.BankTransactionIDText;
+                BankingFile[i].AuthorisationCode = View.AuthorisationCodeText;
+                BankingFile[i].OriginalReference = View.OriginalRefText;
+                BankingFile.Saved = true;
+            }
         }
     }
 }
