@@ -185,7 +185,7 @@ namespace NAB_MVC.Models
             r += paymentChannel.PadRight(21);
             r += maskedCreditCard.PadRight(21);
             r += errorCorrectionCode.PadLeft(3, '0');
-            r += amount.ToString("00").PadLeft(12, '0');
+            r += (amount).ToString("0.##").PadLeft(12, '0');
             r += paymentDateTime.Year.ToString();
             r += paymentDateTime.Month.ToString("00");
             r += paymentDateTime.Day.ToString("00");

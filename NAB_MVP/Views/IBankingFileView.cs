@@ -64,7 +64,7 @@ namespace NAB_MVC.Views
         event EventHandler AddTransactionRequested;
         event EventHandler SaveTransacationRequested;
         event EventHandler<DeletingTransactionEventArg> DeleteTransactionRequested;
-        event EventHandler ViewChanged;
+        //event EventHandler ViewChanged;
         event EventHandler<SavingFileEventArgs> SaveFileRequested;
         event EventHandler<SelectedIndexChangedEventArg> SelectedIndexChanged;
     }
