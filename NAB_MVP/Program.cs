@@ -7,9 +7,6 @@ namespace NAB_MVC
 {
     static class Program
     {
-        /// <summary>
-        /// The main entry point for the application.
-        /// </summary>
         [STAThread]
         static void Main()
         {
@@ -19,8 +16,10 @@ namespace NAB_MVC
 
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
+
             File = new BankingFile();
-            Form = new frmMainForm();
+
+            Form = new frmMainForm(File.PaymentChannelsList, File.PaymentInstructionsList);
             Controller = new ApplicationController(Form, File);
             Application.Run(Form);
         }

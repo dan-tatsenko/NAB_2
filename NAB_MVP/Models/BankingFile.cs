@@ -22,40 +22,69 @@ namespace NAB_MVC.Models
             ["BPY"] = "BPY - Bank Payment",
             ["DPP"] = "DPP - Direct Post Payment",
         };
+        public event EventHandler NewTransactionAdded;
 
-        private List<Transaction> TransactionList;
+        private List<Transaction> transactionList;
+
 
         public int Index { get; set; }
-        public int Count => TransactionList.Count;
-        public bool Saved { get; set; }
+        public int Count => transactionList.Count;
+
+        public List<string> TransactionList
+        {
+            get
+            {
+                List<string> result = new List<string>();
+                foreach (var item in transactionList)
+                {
+                    result.Add(item.ToString());
+                }
+                return result;
+            }
+        }
+
+        public List<string> PaymentInstructionsList
+        {
+            get
+            {
+                List<string> list = new List<string>();
+                foreach (KeyValuePair<string, string> keyValue in PaymentInstructions)
+                {
+                    list.Add(keyValue.Value);
+                }
+                return list;
+            }
+        }
+
+        public List<string> PaymentChannelsList
+        {
+            get
+            {
+                List<string> list = new List<string>();
+                foreach (KeyValuePair<string, string> keyValue in PaymentChannels)
+                {
+                    list.Add(keyValue.Value);
+                }
+                return list;
+            }
+        }
 
         public BankingFile()
         {
-            TransactionList = new List<Transaction>();
+            transactionList = new List<Transaction>();
             Index = -1;
-            Saved = true;
         }
 
         public Transaction this[int index]
         {
-            get => TransactionList[index];
-            set => TransactionList[index] = value;
+            get => transactionList[index];
+            set => transactionList[index] = value;
         }
 
         public void Add ()
         {
-            TransactionList.Add(new Transaction());
-            Index = Count - 1;
-        }
-
-        public List<string> ExportToList()
-        {
-            List<string> result = new List<string>();
-            foreach (var item in TransactionList)
-            {
-                result.Add(item.ToString());
-            }
-            return result;
+            transactionList.Add(new Transaction());
+            NewTransactionAdded(this, EventArgs.Empty);
         }
 
         public void Remove(int index)
@@ -68,7 +97,7 @@ namespace NAB_MVC.Models
                 {
                     Index = index - 1; //new index will be 1 less
                 }
-                TransactionList.RemoveAt(index);
+                transactionList.RemoveAt(index);
             }
         }
 
@@ -78,7 +107,7 @@ namespace NAB_MVC.Models
             f.Close();
             using (StreamWriter sw = new StreamWriter(path, false, System.Text.Encoding.Default))
             {
-                foreach (string line in ExportToList())
+                foreach (string line in TransactionList)
                 {
                     sw.WriteLine(line);
                 }  
@@ -88,7 +117,7 @@ namespace NAB_MVC.Models
         public decimal TotalTransactionAmount()
         {
             decimal r = 0;
-            foreach (var t in TransactionList)
+            foreach (var t in transactionList)
             {
                 r += t.Amount;
             }
@@ -103,26 +132,6 @@ namespace NAB_MVC.Models
         public string GetPaymentChannelDescription (string code)
         {
             return PaymentChannels[code];
-        }
-
-        public List<string> GetPaymentInstructionsList()
-        {
-            List<string> list = new List<string>();
-            foreach (KeyValuePair<string, string> keyValue in PaymentInstructions)
-            {
-                list.Add(keyValue.Value);
-            }
-            return list;
-        }
-
-        public List<string> GetPaymentChannelsList()
-        {
-            List<string> list = new List<string>();
-            foreach (KeyValuePair<string, string> keyValue in PaymentChannels)
-            {
-                list.Add(keyValue.Value);
-            }
-            return list;
         }
 
         public string GetPaymentInstructionCode(string desc)

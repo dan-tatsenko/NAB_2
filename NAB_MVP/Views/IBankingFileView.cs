@@ -55,14 +55,16 @@ namespace NAB_MVC.Views
 
         bool EnabledView { get; set; }
         string TransactionLine { get; set; }
+        List<string> ListDataSource { set; }
 
-        void FillPaymentInstructions(List<string> list);
-        void FillTransactionChannels(List<string> list);
-        void FillList(List<string> list);
+        //void FillPaymentInstructions(List<string> list);
+        //void FillTransactionChannels(List<string> list);
+        //void FillList(List<string> list, int selected);
+
         void ClearView();
 
         event EventHandler AddTransactionRequested;
-        event EventHandler SaveTransacationRequested;
+        event EventHandler UpdateTransacationRequested;
         event EventHandler<DeletingTransactionEventArg> DeleteTransactionRequested;
         //event EventHandler ViewChanged;
         event EventHandler<SavingFileEventArgs> SaveFileRequested;

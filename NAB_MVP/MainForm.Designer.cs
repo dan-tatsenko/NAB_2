@@ -34,7 +34,7 @@
             this.cbxPaymentInstruction = new System.Windows.Forms.ComboBox();
             this.lblAmount = new System.Windows.Forms.Label();
             this.txtAmount = new System.Windows.Forms.TextBox();
-            this.btnSaveTransaction = new System.Windows.Forms.Button();
+            this.btnUpdateTransaction = new System.Windows.Forms.Button();
             this.lblTransactionString = new System.Windows.Forms.Label();
             this.lblSourceIdentifier = new System.Windows.Forms.Label();
             this.txtSourceIdentifier = new System.Windows.Forms.TextBox();
@@ -81,7 +81,6 @@
             this.txtAccountNumber.Name = "txtAccountNumber";
             this.txtAccountNumber.Size = new System.Drawing.Size(156, 20);
             this.txtAccountNumber.TabIndex = 1;
-            this.txtAccountNumber.TextChanged += new System.EventHandler(this.txtAccountNumber_TextChanged);
             // 
             // lblPaymentInstruction
             // 
@@ -101,7 +100,6 @@
             this.cbxPaymentInstruction.Name = "cbxPaymentInstruction";
             this.cbxPaymentInstruction.Size = new System.Drawing.Size(156, 21);
             this.cbxPaymentInstruction.TabIndex = 3;
-            this.cbxPaymentInstruction.SelectedIndexChanged += new System.EventHandler(this.cbxPaymentInstruction_SelectedIndexChanged);
             // 
             // lblAmount
             // 
@@ -119,17 +117,16 @@
             this.txtAmount.Name = "txtAmount";
             this.txtAmount.Size = new System.Drawing.Size(156, 20);
             this.txtAmount.TabIndex = 5;
-            this.txtAmount.TextChanged += new System.EventHandler(this.txtAmount_TextChanged);
             // 
-            // btnSaveTransaction
+            // btnUpdateTransaction
             // 
-            this.btnSaveTransaction.Location = new System.Drawing.Point(325, 175);
-            this.btnSaveTransaction.Name = "btnSaveTransaction";
-            this.btnSaveTransaction.Size = new System.Drawing.Size(250, 25);
-            this.btnSaveTransaction.TabIndex = 6;
-            this.btnSaveTransaction.Text = "Save Transaction";
-            this.btnSaveTransaction.UseVisualStyleBackColor = true;
-            this.btnSaveTransaction.Click += new System.EventHandler(this.btnSaveTransaction_Click);
+            this.btnUpdateTransaction.Location = new System.Drawing.Point(325, 175);
+            this.btnUpdateTransaction.Name = "btnUpdateTransaction";
+            this.btnUpdateTransaction.Size = new System.Drawing.Size(250, 25);
+            this.btnUpdateTransaction.TabIndex = 6;
+            this.btnUpdateTransaction.Text = "Update Transaction";
+            this.btnUpdateTransaction.UseVisualStyleBackColor = true;
+            this.btnUpdateTransaction.Click += new System.EventHandler(this.btnUpdateTransaction_Click);
             // 
             // lblTransactionString
             // 
@@ -154,7 +151,6 @@
             this.txtSourceIdentifier.Name = "txtSourceIdentifier";
             this.txtSourceIdentifier.Size = new System.Drawing.Size(156, 20);
             this.txtSourceIdentifier.TabIndex = 9;
-            this.txtSourceIdentifier.TextChanged += new System.EventHandler(this.txtSourceIdentifier_TextChanged);
             // 
             // lblPaymentChanell
             // 
@@ -174,7 +170,6 @@
             this.cbxPaymentChannel.Name = "cbxPaymentChannel";
             this.cbxPaymentChannel.Size = new System.Drawing.Size(156, 21);
             this.cbxPaymentChannel.TabIndex = 11;
-            this.cbxPaymentChannel.SelectedIndexChanged += new System.EventHandler(this.cbxPaymentChannel_SelectedIndexChanged);
             // 
             // lblCreditCard
             // 
@@ -191,7 +186,6 @@
             this.txtCreditCard.Name = "txtCreditCard";
             this.txtCreditCard.Size = new System.Drawing.Size(156, 20);
             this.txtCreditCard.TabIndex = 13;
-            this.txtCreditCard.TextChanged += new System.EventHandler(this.txtCreditCard_TextChanged);
             // 
             // lblErrorCorrectionReason
             // 
@@ -208,7 +202,6 @@
             this.txtErrorCorrectionReason.Name = "txtErrorCorrectionReason";
             this.txtErrorCorrectionReason.Size = new System.Drawing.Size(156, 20);
             this.txtErrorCorrectionReason.TabIndex = 15;
-            this.txtErrorCorrectionReason.TextChanged += new System.EventHandler(this.txtErrorCorrectionReason_TextChanged);
             // 
             // lblPaymentDate
             // 
@@ -228,7 +221,6 @@
             this.dtpPaymentDate.Size = new System.Drawing.Size(131, 20);
             this.dtpPaymentDate.TabIndex = 17;
             this.dtpPaymentDate.Value = new System.DateTime(2019, 5, 6, 0, 0, 0, 0);
-            this.dtpPaymentDate.ValueChanged += new System.EventHandler(this.dtpPaymentDate_ValueChanged);
             // 
             // lblPaymentTime
             // 
@@ -264,7 +256,6 @@
             this.dtpSettlementDate.Name = "dtpSettlementDate";
             this.dtpSettlementDate.Size = new System.Drawing.Size(131, 20);
             this.dtpSettlementDate.TabIndex = 21;
-            this.dtpSettlementDate.ValueChanged += new System.EventHandler(this.dtpSettlementDate_ValueChanged);
             // 
             // lblBankTransactionID
             // 
@@ -282,7 +273,6 @@
             this.txtBankTransactionID.Name = "txtBankTransactionID";
             this.txtBankTransactionID.Size = new System.Drawing.Size(131, 20);
             this.txtBankTransactionID.TabIndex = 23;
-            this.txtBankTransactionID.TextChanged += new System.EventHandler(this.txtBankTransactionID_TextChanged);
             // 
             // lblAuthorisationCode
             // 
@@ -299,7 +289,6 @@
             this.txtAuthorisationCode.Name = "txtAuthorisationCode";
             this.txtAuthorisationCode.Size = new System.Drawing.Size(131, 20);
             this.txtAuthorisationCode.TabIndex = 25;
-            this.txtAuthorisationCode.TextChanged += new System.EventHandler(this.txtAuthorisationCode_TextChanged);
             // 
             // lblOriginalReference
             // 
@@ -316,7 +305,6 @@
             this.txtOriginalReference.Name = "txtOriginalReference";
             this.txtOriginalReference.Size = new System.Drawing.Size(131, 20);
             this.txtOriginalReference.TabIndex = 27;
-            this.txtOriginalReference.TextChanged += new System.EventHandler(this.txtOriginalReference_TextChanged);
             // 
             // lstFile
             // 
@@ -335,7 +323,7 @@
             this.btnAddNewTransaction.Name = "btnAddNewTransaction";
             this.btnAddNewTransaction.Size = new System.Drawing.Size(147, 23);
             this.btnAddNewTransaction.TabIndex = 30;
-            this.btnAddNewTransaction.Text = "Add Transaction";
+            this.btnAddNewTransaction.Text = "Add New Transaction";
             this.btnAddNewTransaction.UseVisualStyleBackColor = true;
             this.btnAddNewTransaction.Click += new System.EventHandler(this.btnAddNewTransaction_Click);
             // 
@@ -395,7 +383,7 @@
             this.Controls.Add(this.txtSourceIdentifier);
             this.Controls.Add(this.lblSourceIdentifier);
             this.Controls.Add(this.lblTransactionString);
-            this.Controls.Add(this.btnSaveTransaction);
+            this.Controls.Add(this.btnUpdateTransaction);
             this.Controls.Add(this.txtAmount);
             this.Controls.Add(this.lblAmount);
             this.Controls.Add(this.cbxPaymentInstruction);
@@ -419,7 +407,7 @@
         private System.Windows.Forms.ComboBox cbxPaymentInstruction;
         private System.Windows.Forms.Label lblAmount;
         private System.Windows.Forms.TextBox txtAmount;
-        private System.Windows.Forms.Button btnSaveTransaction;
+        private System.Windows.Forms.Button btnUpdateTransaction;
         private System.Windows.Forms.Label lblTransactionString;
         private System.Windows.Forms.Label lblSourceIdentifier;
         private System.Windows.Forms.TextBox txtSourceIdentifier;
