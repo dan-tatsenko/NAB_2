@@ -16,15 +16,19 @@ namespace NAB_MVC
     {
 
         public event EventHandler AddTransactionRequested;
-        public event EventHandler ViewChanged;
-        public event EventHandler SaveTransacationRequested;
+        public event EventHandler UpdateTransacationRequested;
         public event EventHandler<SavingFileEventArgs> SaveFileRequested;
         public event EventHandler<DeletingTransactionEventArg> DeleteTransactionRequested;
         public event EventHandler<SelectedIndexChangedEventArg> SelectedIndexChanged;
         private bool enabledView;
-        public frmMainForm()
+
+        public frmMainForm(List<string> PaymentChannels, List<string> PaymentInstructions)
         {
             InitializeComponent();
+            cbxPaymentChannel.DataSource = null;
+            cbxPaymentChannel.DataSource = PaymentChannels;
+            cbxPaymentInstruction.DataSource = null;
+            cbxPaymentInstruction.DataSource = PaymentInstructions;
         }
 
 
@@ -60,6 +64,7 @@ namespace NAB_MVC
         public string BankTransactionIDText { get => txtBankTransactionID.Text; set => txtBankTransactionID.Text = value; }
         public string AuthorisationCodeText { get => txtAuthorisationCode.Text; set => txtAuthorisationCode.Text = value; }
         public string OriginalRefText { get => txtOriginalReference.Text; set => txtOriginalReference.Text = value; }
+
         public bool EnabledView
         {
             get => enabledView;
@@ -81,103 +86,21 @@ namespace NAB_MVC
                 dtpSettlementDate.Enabled = value;
                 cbxPaymentChannel.Enabled = value;
                 cbxPaymentInstruction.Enabled = value;
-                btnSaveTransaction.Enabled = value;
+                btnUpdateTransaction.Enabled = value;
             }
         }
 
-        public void FillTransactionChannels(List<string> list)
-        {
-            cbxPaymentChannel.Items.Clear();
-            cbxPaymentChannel.Items.AddRange(list.ToArray());
-        }
-        public void FillPaymentInstructions(List<string> list)
-        {
-            cbxPaymentInstruction.Items.Clear();
-            cbxPaymentInstruction.Items.AddRange(list.ToArray());
-        }
+        public List<string> ListDataSource { set => lstFile.DataSource = value; }
 
-        private void txtSourceIdentifier_TextChanged(object sender, EventArgs e)
-        {
-            ViewChanged(this, new EventArgs());
-        }
 
         private void btnAddNewTransaction_Click(object sender, EventArgs e)
         {
             AddTransactionRequested(this, new EventArgs());
         }
 
-        public void FillList(List<string> list)
+        private void btnUpdateTransaction_Click(object sender, EventArgs e)
         {
-            lstFile.Items.Clear();
-            foreach (string line in list)
-            {
-                lstFile.Items.Add(line);
-            }
-        }
-
-        private void txtAccountNumber_TextChanged(object sender, EventArgs e)
-        {
-            ViewChanged(this, new EventArgs());
-        }
-
-        private void cbxPaymentInstruction_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            ViewChanged(this, new EventArgs());
-        }
-
-        private void cbxPaymentChannel_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            ViewChanged(this, new EventArgs());
-        }
-
-        private void txtCreditCard_TextChanged(object sender, EventArgs e)
-        {
-            ViewChanged(this, new EventArgs());
-        }
-
-        private void txtErrorCorrectionReason_TextChanged(object sender, EventArgs e)
-        {
-            ViewChanged(this, new EventArgs());
-        }
-
-        private void txtAmount_TextChanged(object sender, EventArgs e)
-        {
-            ViewChanged(this, new EventArgs());
-        }
-
-        private void dtpPaymentDate_ValueChanged(object sender, EventArgs e)
-        {
-            ViewChanged(this, new EventArgs());
-        }
-
-        private void dtpPaymentTime_ValueChanged(object sender, EventArgs e)
-        {
-            ViewChanged(this, new EventArgs());
-        }
-
-        private void dtpSettlementDate_ValueChanged(object sender, EventArgs e)
-        {
-            ViewChanged(this, new EventArgs());
-        }
-
-        private void txtBankTransactionID_TextChanged(object sender, EventArgs e)
-        {
-            ViewChanged(this, new EventArgs());
-        }
-
-        private void txtAuthorisationCode_TextChanged(object sender, EventArgs e)
-        {
-            ViewChanged(this, new EventArgs());
-        }
-
-        private void txtOriginalReference_TextChanged(object sender, EventArgs e)
-        {
-            ViewChanged(this, new EventArgs());
-        }
-
-        private void btnSaveTransaction_Click(object sender, EventArgs e)
-        {
-            SaveTransacationRequested(this, new EventArgs());
+            UpdateTransacationRequested(this, new EventArgs());
         }
 
         private void btnDeleteTransaction_Click(object sender, EventArgs e)
