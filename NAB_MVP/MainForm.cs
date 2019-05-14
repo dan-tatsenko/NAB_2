@@ -32,7 +32,6 @@ namespace NAB_MVC
         }
 
 
-        public string TransactionLine { get => lblTransactionString.Text; set => lblTransactionString.Text = value; }
         public string SourceIdetifierText { get => txtSourceIdentifier.Text; set => txtSourceIdentifier.Text = value; }
         public string AccountNumberText { get => txtAccountNumber.Text; set => txtAccountNumber.Text = value; }
         public string PaymentInstructionText
@@ -90,17 +89,21 @@ namespace NAB_MVC
             }
         }
 
-        public List<string> ListDataSource { set => lstFile.DataSource = value; }
-
+        public void UpdateListDataSource (List<string> data, int index)
+        {
+            lstFile.DataSource = null;
+            lstFile.DataSource = data;
+            lstFile.SelectedIndex = index;
+        }
 
         private void btnAddNewTransaction_Click(object sender, EventArgs e)
         {
-            AddTransactionRequested(this, new EventArgs());
+            AddTransactionRequested(this, EventArgs.Empty);
         }
 
         private void btnUpdateTransaction_Click(object sender, EventArgs e)
         {
-            UpdateTransacationRequested(this, new EventArgs());
+            UpdateTransacationRequested(this, EventArgs.Empty);
         }
 
         private void btnDeleteTransaction_Click(object sender, EventArgs e)
@@ -119,14 +122,8 @@ namespace NAB_MVC
             SaveFileRequested(this, args);
         }
 
-        private void lstFile_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            SelectedIndexChanged(this, new SelectedIndexChangedEventArg(lstFile.SelectedIndex));
-        }
-
         public void ClearView()
         {
-            lstFile.Items.Clear();
             txtAccountNumber.Text = "";
             txtAmount.Text = "";
             txtAuthorisationCode.Text = "";
@@ -140,6 +137,14 @@ namespace NAB_MVC
             dtpSettlementDate.Value = DateTime.Today;
             cbxPaymentChannel.SelectedIndex = 0;
             cbxPaymentInstruction.SelectedIndex = 0;
+        }
+
+        private void lstFile_Click(object sender, EventArgs e)
+        {
+            if (lstFile.SelectedIndex > -1)
+            {
+                SelectedIndexChanged(this, new SelectedIndexChangedEventArg(lstFile.SelectedIndex));
+            }
         }
     }
 }

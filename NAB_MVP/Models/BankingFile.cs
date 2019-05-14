@@ -84,6 +84,7 @@ namespace NAB_MVC.Models
         public void Add ()
         {
             transactionList.Add(new Transaction());
+            Index = Count - 1;
             NewTransactionAdded(this, EventArgs.Empty);
         }
 
@@ -122,6 +123,16 @@ namespace NAB_MVC.Models
                 r += t.Amount;
             }
             return r;
+        }
+
+        private string FileHeader()
+        {
+            return "";
+        }
+
+        private string FileTrailer()
+        {
+            return "";
         }
 
         public string GetPaymentInstructionDescription(string code)
