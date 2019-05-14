@@ -31,7 +31,8 @@ namespace NAB_MVC.Controllers
 
         private void BankingFile_NewTransactionAdded(object sender, EventArgs e)
         {
-            View.ListDataSource = BankingFile.TransactionList;
+            UpdateFields();
+            View.UpdateListDataSource(BankingFile.TransactionList, BankingFile.Index);
         }
 
         private void View_SelectedIndexChanged(object sender, SelectedIndexChangedEventArg e)
@@ -39,35 +40,34 @@ namespace NAB_MVC.Controllers
             UpdateBankingFile();
             BankingFile.Index = e.NewIndex;
             UpdateFields();
-            View.ListDataSource = BankingFile.TransactionList;
+            View.UpdateListDataSource(BankingFile.TransactionList, BankingFile.Index);
         }
 
         private void View_DeleteTransactionRequested(object sender, DeletingTransactionEventArg deletingTransactionEventArg)
         {
             BankingFile.Remove(deletingTransactionEventArg.DeletingIndex);
             UpdateFields();
-            View.ListDataSource = BankingFile.TransactionList;
+            View.UpdateListDataSource(BankingFile.TransactionList, BankingFile.Index);
         }
 
         private void View_SaveFileRequested(object sender, SavingFileEventArgs e)
         {
             UpdateBankingFile();
-            View.ListDataSource = BankingFile.TransactionList;
+            View.UpdateListDataSource(BankingFile.TransactionList, BankingFile.Index);
             BankingFile.SaveToFile(e.Path);  
         }
 
         private void View_UpdateTransacationRequested(object sender, EventArgs e)
         {
             UpdateBankingFile();
-            View.ListDataSource = BankingFile.TransactionList;
+            View.UpdateListDataSource(BankingFile.TransactionList, BankingFile.Index);
         }
 
         private void View_AddTransactionRequested(object sender, EventArgs e)
         {
-            //If there is no transactions, all elements are enabled and user tries to add first one
             if (!View.EnabledView)
             {
-                View.EnabledView = true; //Enable elements and clear them
+                View.EnabledView = true;
                 View.ClearView();
             }
             BankingFile.Add();
@@ -110,11 +110,11 @@ namespace NAB_MVC.Controllers
                 BankingFile[i].PaymentInstruction = BankingFile.GetPaymentInstructionCode(View.PaymentInstructionText);
                 BankingFile[i].PaymentChannel = BankingFile.GetPaymentChannelCode(View.PaymentChannelText);
                 BankingFile[i].ErrorCorrectionCode = View.ErrorCorrectionReasonText;
-                int a = 0;
-                int.TryParse(View.AmountText, out a);
-                BankingFile[i].Amount = a * 100;
-                BankingFile[i].PaymentDateTime = View.PaymentDate.Date;
-                BankingFile[i].PaymentDateTime = View.PaymentTime;
+
+                BankingFile[i].Amount = Convert.ToInt32(decimal.Parse(View.AmountText) * 100);
+                BankingFile[i].PaymentDateTime = new DateTime(View.PaymentDate.Year, View.PaymentDate.Month,
+                                                                View.PaymentDate.Day, View.PaymentTime.Hour,
+                                                                View.PaymentTime.Minute, View.PaymentTime.Second);
                 BankingFile[i].SettlementDate = View.SettlementTime;
                 BankingFile[i].BankTransactionID = View.BankTransactionIDText;
                 BankingFile[i].AuthorisationCode = View.AuthorisationCodeText;

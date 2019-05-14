@@ -315,7 +315,7 @@
             this.lstFile.ScrollAlwaysVisible = true;
             this.lstFile.Size = new System.Drawing.Size(737, 173);
             this.lstFile.TabIndex = 29;
-            this.lstFile.SelectedIndexChanged += new System.EventHandler(this.lstFile_SelectedIndexChanged);
+            this.lstFile.Click += new System.EventHandler(this.lstFile_Click);
             // 
             // btnAddNewTransaction
             // 
