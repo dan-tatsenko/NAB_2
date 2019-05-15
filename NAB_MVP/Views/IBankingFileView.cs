@@ -53,7 +53,7 @@ namespace NAB_MVC.Views
         string AuthorisationCodeText { get; set; }
         string OriginalRefText { get; set; }
 
-        bool EnabledView { get; set; }
+        bool IsViewEnabled { get; set; }
         void UpdateListDataSource(List<string> data, int index);
         void ClearView();
 

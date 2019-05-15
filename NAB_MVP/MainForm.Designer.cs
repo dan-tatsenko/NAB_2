@@ -393,7 +393,7 @@
             this.MaximizeBox = false;
             this.Name = "frmMainForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Banking Interfaces - NAB Multi-Account File";
+            this.Text = "NAB Multi-Account File Generator";
             this.ResumeLayout(false);
             this.PerformLayout();
 
