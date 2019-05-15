@@ -111,8 +111,9 @@ namespace NAB_MVC.Models
                 sw.WriteLine(FileHeader());
                 foreach (string line in TransactionList)
                 {
-                    //sw.WriteLine(line.Remove(13,1).Insert(31,"0"));
-                    sw.WriteLine(line);
+                    //Add 0 at the end of Account Number
+                    sw.WriteLine(line.Remove(13,1).Insert(31,"0"));
+                    //sw.WriteLine(line);
                 } 
                 sw.WriteLine(FileTrailer());
             }
