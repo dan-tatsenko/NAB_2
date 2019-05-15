@@ -64,7 +64,7 @@ namespace NAB_MVC
         public string AuthorisationCodeText { get => txtAuthorisationCode.Text; set => txtAuthorisationCode.Text = value; }
         public string OriginalRefText { get => txtOriginalReference.Text; set => txtOriginalReference.Text = value; }
 
-        public bool EnabledView
+        public bool IsViewEnabled
         {
             get => enabledView;
             set
@@ -86,6 +86,7 @@ namespace NAB_MVC
                 cbxPaymentChannel.Enabled = value;
                 cbxPaymentInstruction.Enabled = value;
                 btnUpdateTransaction.Enabled = value;
+                btnDeleteTransaction.Enabled = value;
             }
         }
 

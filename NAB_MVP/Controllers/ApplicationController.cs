@@ -19,7 +19,7 @@ namespace NAB_MVC.Controllers
         {
             View = view;
             BankingFile = file;
-            View.EnabledView = false;
+            View.IsViewEnabled = false;
 
             View.AddTransactionRequested += View_AddTransactionRequested;
             View.UpdateTransacationRequested += View_UpdateTransacationRequested;
@@ -65,9 +65,9 @@ namespace NAB_MVC.Controllers
 
         private void View_AddTransactionRequested(object sender, EventArgs e)
         {
-            if (!View.EnabledView)
+            if (!View.IsViewEnabled)
             {
-                View.EnabledView = true;
+                View.IsViewEnabled = true;
                 View.ClearView();
             }
             BankingFile.Add();
@@ -84,7 +84,7 @@ namespace NAB_MVC.Controllers
                 View.PaymentChannelText = BankingFile.GetPaymentChannelDescription(BankingFile[i].PaymentChannel.Substring(0, 3));
                 View.CreditCardText = BankingFile[i].MaskedCreditCard;
                 View.ErrorCorrectionReasonText = BankingFile[i].ErrorCorrectionCode;
-                View.AmountText = (BankingFile[i].Amount / 100).ToString("0.##");
+                View.AmountText = (BankingFile[i].Amount * 0.01).ToString("0.##");
                 View.PaymentDate = BankingFile[i].PaymentDateTime;
                 View.PaymentTime = BankingFile[i].PaymentDateTime;
                 View.SettlementTime = BankingFile[i].SettlementDate;
@@ -95,7 +95,7 @@ namespace NAB_MVC.Controllers
             else
             {
                 View.ClearView();
-                View.EnabledView = false;
+                View.IsViewEnabled = false;
             }
         }
 
@@ -110,6 +110,15 @@ namespace NAB_MVC.Controllers
                 BankingFile[i].PaymentInstruction = BankingFile.GetPaymentInstructionCode(View.PaymentInstructionText);
                 BankingFile[i].PaymentChannel = BankingFile.GetPaymentChannelCode(View.PaymentChannelText);
                 BankingFile[i].ErrorCorrectionCode = View.ErrorCorrectionReasonText;
+                decimal a = 0;
+
+                if (!decimal.TryParse(View.AmountText, out a) || a < 0)
+                {
+                    View.AmountText = "0";
+                    a = 0;
+                    throw new Exception("Incorrect Amount value");
+                }
+                BankingFile[i].Amount = Convert.ToInt32(a * 100);
 
                 BankingFile[i].Amount = Convert.ToInt32(decimal.Parse(View.AmountText) * 100);
                 BankingFile[i].PaymentDateTime = new DateTime(View.PaymentDate.Year, View.PaymentDate.Month,

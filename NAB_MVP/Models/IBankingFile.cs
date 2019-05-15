@@ -25,7 +25,6 @@ namespace NAB_MVC.Models
         string GetPaymentChannelDescription(string code);
         string GetPaymentInstructionCode(string desc);
         string GetPaymentChannelCode(string desc);
-        decimal TotalTransactionAmount();
         void SaveToFile(string path);
 
     }

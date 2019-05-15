@@ -64,7 +64,7 @@ namespace NAB_MVC.Models
                 {
                     accountNumber = value.Substring(0, 20);
                 }
-                else accountNumber = value+"0";
+                else accountNumber = value;
 
             }
         }
